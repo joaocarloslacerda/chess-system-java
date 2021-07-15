@@ -6,7 +6,7 @@ public class Position {
 	private int row;
 	private int column;
 	
-	//criando construtor personalizado tendo como parâmetro row e column
+	//criando construtor personalizado tendo como parâmetro os atributos row e column
 	public Position(int row, int column) {
 		this.row = row;
 		this.column = column;
