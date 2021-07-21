@@ -35,13 +35,22 @@ public class Board {
 		this.columns = columns;
 	}
 	
-	
+	//retornando uma peça em determinada posição na matriz de peças
 	public Piece piece(int row, int column) {
 		return pieces[row][column];
 	}
 	
+	//retornado a posição de uma peça na matriz de peças
 	public Piece piece(Position position) {
 		return pieces[position.getRow()][position.getColumn()];
+	}
+	
+	//método que insere uma peça, tendo como parâmetro pice e position
+	public void placePiece(Piece piece, Position position) {
+		//peça inserida na matriz de peças
+		pieces[position.getRow()][position.getColumn()] = piece;
+		//passando a posição da peça para piece.position
+		piece.position = position;
 	}
 
 }

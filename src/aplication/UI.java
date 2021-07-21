@@ -3,7 +3,6 @@ package aplication;
 import chess.ChessPiece;
 
 //classe UI(user interface ou interface do usuário
-
 public class UI {
 	
 	public static void printBoard(ChessPiece[][] pieces) {
