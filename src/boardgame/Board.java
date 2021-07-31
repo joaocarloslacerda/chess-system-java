@@ -14,6 +14,7 @@ public class Board {
 			//caso tenha entrado no if a exceção é lançada
 			throw new BoardException("Erros creating board: there must be at least 1 row and 1 column");
 		}
+		//se passar pelo if anterior passa para os atributos(rows e columns) da classe os dados passados por parâmetro ao construtor da classe
 		this.rows = rows;
 		this.columns = columns;
 		//instanciando a matriz pieces com um new Piece tendo os atributos rows e columns como linhas e colunas

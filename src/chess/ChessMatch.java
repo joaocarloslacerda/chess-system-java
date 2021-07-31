@@ -30,12 +30,18 @@ public class ChessMatch {
 		return mat;
 	}
 	
-	//método responsável por iniciar a partida de xadrez colocando as peças no tabuleiro
+	//método responsável por colocar um peça no tabuleiro
+	private void placeNewPiece(char column, int row, ChessPiece piece) {
+		board.placePiece(piece, new ChessPosition(column, row).toPosition());
+	}
+	
+	
+	//método responsável por iniciar a partida de xadrez chamando e chamar o método que coloca as peças no tabuleiro passando para ele a coluna, a linha e a peça
 	public void initialSetup() {
-		//inicializando peças, cada uma com a sua devida cor e posição
-		board.placePiece(new Rook(board, Color.WHITE), new Position(2, 1));
-		board.placePiece(new King(board, Color.BLACK), new Position(0, 4));
-		board.placePiece(new King(board, Color.WHITE), new Position(7, 4));
+		//chama o método plaeNewPiece para colocar peças, passando para ele a posição escolhida e a peça que deve ser movimentada
+		placeNewPiece('b', 6, new Rook(board, Color.WHITE));
+		placeNewPiece('e', 8, new King(board, Color.BLACK));
+		placeNewPiece('e', 1, new King(board, Color.WHITE));
 	}
 
 }
