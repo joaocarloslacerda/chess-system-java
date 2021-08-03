@@ -30,12 +30,29 @@ public class ChessMatch {
 		return mat;
 	}
 	
-	//método responsável por iniciar a partida de xadrez colocando as peças no tabuleiro
+	//método responsável por colocar peças no tabuleiro
+	private void placeNewPiece(char column, int row, ChessPiece piece) {
+		//é chamado o método placePice, passando para ele por parâmetro uma peça, e também um new ChessPosition passando por parâmetro a coluna e a linha da peça
+		board.placePiece(piece, new ChessPosition(column, row).toPosition());
+	}
+	
+	//método responsável por iniciar a partida de xadrez chamando o método que coloca as peças no tabuleiro
 	public void initialSetup() {
 		//inicializando peças, cada uma com a sua devida cor e posição
-		board.placePiece(new Rook(board, Color.WHITE), new Position(2, 1));
-		board.placePiece(new King(board, Color.BLACK), new Position(0, 4));
-		board.placePiece(new King(board, Color.WHITE), new Position(7, 4));
+		//o método placeNewPiece é chamado recebendo como parâmetro a coluna, a linha, e a peça com a sua respectiva cor
+		placeNewPiece('c', 1, new Rook(board, Color.WHITE));
+        placeNewPiece('c', 2, new Rook(board, Color.WHITE));
+        placeNewPiece('d', 2, new Rook(board, Color.WHITE));
+        placeNewPiece('e', 2, new Rook(board, Color.WHITE));
+        placeNewPiece('e', 1, new Rook(board, Color.WHITE));
+        placeNewPiece('d', 1, new King(board, Color.WHITE));
+
+        placeNewPiece('c', 7, new Rook(board, Color.BLACK));
+        placeNewPiece('c', 8, new Rook(board, Color.BLACK));
+        placeNewPiece('d', 7, new Rook(board, Color.BLACK));
+        placeNewPiece('e', 7, new Rook(board, Color.BLACK));
+        placeNewPiece('e', 8, new Rook(board, Color.BLACK));
+        placeNewPiece('d', 8, new King(board, Color.BLACK));
 	}
 
 }

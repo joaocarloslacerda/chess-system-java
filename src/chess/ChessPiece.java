@@ -16,7 +16,7 @@ public class ChessPiece extends Piece{
 	}
 	
 	//retornando o atributo color
-	public Color color() {
+	public Color getColor() {
 		return color;
 	}
 	
