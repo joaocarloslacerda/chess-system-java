@@ -1,6 +1,6 @@
 package boardgame;
 
-//classe BoardEception herda a classe RuntimeException, para que desta forma seja opção o tratamento de uma determinada exceção
+//classe BoardEception herda a classe RuntimeException, para que desta forma seja opcional o tratamento de uma determinada exceção
 public class BoardException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 	
