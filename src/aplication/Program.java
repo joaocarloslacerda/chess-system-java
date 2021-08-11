@@ -1,7 +1,9 @@
 package aplication;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import chess.ChessException;
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
@@ -14,16 +16,41 @@ public class Program {
 		ChessMatch chessMatch = new ChessMatch();
 		
 		while(true) {
-			UI.printBoard(chessMatch.getPieces());
-			System.out.println();
-			System.out.println("Source: ");
-			ChessPosition source = UI.readChessPosition(sc);
-			
-			System.out.println();
-			System.out.println("Target: ");
-			ChessPosition target = UI.readChessPosition(sc);
-			
-			ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+			//bloco try para que caso ocorra alguma exceção dentro dele o bloco catch correspondente é acessado
+			try {
+				//chamando o método para limpar a tela antes de printar o tabuleiro, isto ocorre após cada nova interação
+				UI.clearScreen();
+				//pritando o tabuleiro e duas peças
+				UI.printBoard(chessMatch.getPieces());
+				//espaçamento após o print anterior
+				System.out.println();
+				//solicitando para o usuário informar a posição atual da peça a ser movimentada
+				System.out.println("Source: ");
+				//o atributo source recebe o retorno do método readChessPosition que faz a leitura da posição informada pelo usuário
+				ChessPosition source = UI.readChessPosition(sc);
+				//espaçamento após o print anterior
+				System.out.println();
+				//solicitando para o usuário informar a posição de destino da peça a ser movimentada
+				System.out.println("Target: ");
+				//o atributo target recebe o retorno do método readChessPosition que faz a leitura da posição informada pelo usuário
+				ChessPosition target = UI.readChessPosition(sc);
+				//atributo capturedPiece recebe o retorno do método performChessMove que após as suas validações e chamada do método que movimenta a peça retorna a peça retirada do tabuleiro
+				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+			}
+			//bloco catch que é acessado caso ocorra uma exceção de erro no tabuleiro
+			catch(ChessException e) {
+				//printando a mensagem
+				System.out.println(e.getMessage());
+				//nextLine para mostrar a mensagem e aguardar um enter para então retornar para a solicitação de entrada novamente
+				sc.nextLine();
+			}
+			//bloco catch que é acessado caso ocorra uma exceção caso tenha algum erro da entrada de dados
+			catch(InputMismatchException e) {
+				//printando a mensagem
+				System.out.println(e.getMessage());
+				//nextLine para mostrar a mensagem e aguardar um enter para então retornar para a solicitação de entrada novamente
+				sc.nextLine();
+			}
 		}
 		
 	}
