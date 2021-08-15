@@ -4,7 +4,7 @@ import boardgame.Board;
 import boardgame.Piece;
 
 //subclasse ChessPiece herda a classe Piece com os seus dados e funcionalidades
-public class ChessPiece extends Piece{
+public abstract class ChessPiece extends Piece{
 
 	private Color color;
 	

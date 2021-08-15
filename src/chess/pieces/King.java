@@ -18,4 +18,11 @@ public class King extends ChessPiece{
 		return "K";
 	}
 
+	//metodo que retorna os possíveis movimentos de uma peça para o método possbleMovie
+	@Override
+	public boolean[][] possibleMoves() {
+		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+		return mat;
+	}
+
 }
