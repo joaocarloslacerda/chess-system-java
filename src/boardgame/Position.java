@@ -32,6 +32,12 @@ public class Position {
 		this.column = column;
 	}
 	
+	//atualizando os valores de uma posição
+	public void setValues(int row, int column) {
+		this.row = row;
+		this.column = column;
+	}
+	
 	@Override
 	//printando o valor no atributo row e column
 	public String toString() {
