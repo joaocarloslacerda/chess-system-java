@@ -28,6 +28,12 @@ public class Program {
 				System.out.println("Source: ");
 				//o atributo source recebe o retorno do método readChessPosition que faz a leitura da posição informada pelo usuário
 				ChessPosition source = UI.readChessPosition(sc);
+				//criando uma matriz booleana que recebe uma os movimentos possíveis de uma partida a partir de uma posição de origem
+				boolean[][] possibleMoves = chessMatch.possibleMoves(source);
+				//limpando a tela
+				UI.clearScreen();
+				//printando o tabuleiro com as suas peças e os movimentos possíveis já coloridos de uma determinada peça 
+				UI.printBoard(chessMatch.getPieces(), possibleMoves);
 				//espaçamento após o print anterior
 				System.out.println();
 				//solicitando para o usuário informar a posição de destino da peça a ser movimentada

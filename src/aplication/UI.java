@@ -56,6 +56,7 @@ public class UI {
 		}
 	}
 	
+	//método responsável por printar o tabuleiro tendo como parâmetro a matriz de peças
 	public static void printBoard(ChessPiece[][] pieces) {
 		//percorre cada linha da matriz
 		for(int i=0; i<pieces.length; i++) {
@@ -63,8 +64,8 @@ public class UI {
 			System.out.print(8 - i + " ");
 			//percorre cada coluna da matriz
 			for(int j=0; j<pieces.length; j++) {
-				//chama o método que verifica se tem ou não uma peça na posição, passando como parãmetro o dado contido no local
-				printPiece(pieces[i][j]);
+				//chama o método que verifica e printa se tem ou não uma peça na posição, passando como parãmetro o dado contido no local e false informando que não tem a necessidade de colorir a posição com outra cor
+				printPiece(pieces[i][j], false);
 			}
 			//quebra de linha
 			System.out.println();
@@ -73,10 +74,34 @@ public class UI {
 		System.out.println("  a b c d e f g h");
 	}
 	
-	private static void printPiece(ChessPiece piece) {
+	//método responsável por printar o tabuleiro tendo como parâmetro a matriz de peças e a matriz com os movimentos possíveis
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+		//percorre cada linha da matriz
+		for(int i=0; i<pieces.length; i++) {
+			//printa o número da linha
+			System.out.print(8 - i + " ");
+			//percorre cada coluna da matriz
+			for(int j=0; j<pieces.length; j++) {
+				//chama o método que verifica e printa se tem ou não uma peça na posição, passando como parãmetro o dado contido no local e os movimentos possíveis
+				printPiece(pieces[i][j], possibleMoves[i][j]);
+			}
+			//quebra de linha
+			System.out.println();
+		}
+		//printa a letra de cada coluna da matriz
+		System.out.println("  a b c d e f g h");
+	}
+	
+	//método responsável por printar as posições do tabuleiro com o dado contido em cada posição e com os movimentos possíveis coloridos se for o caso
+	private static void printPiece(ChessPiece piece, boolean background) {
+		//verificando se tem algum movimento possível para printar, se o backgrounf conter "false" não entra no if
+		if(background) {
+			//printando a posição do movimento possível já colorida
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
 		//caso não tenha peça na posição entra no if e printa um -
     	if (piece == null) {
-            System.out.print("-");
+            System.out.print("-" + ANSI_RESET);
         }
     	//caso tenha uma peça entra no else, faz a verificação da cor da peça e printa ela com a respectiva cor
         else {
