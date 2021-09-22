@@ -28,7 +28,7 @@ public class Rook extends ChessPiece{
 		Position p = new Position(0,0);
 		
 		//ABOVE
-		//atualizando para a linha anterior a da peça
+		//atualizando os valores da posição para a linha anterior a da peça
 		p.setValues(position.getRow() - 1, position.getColumn());
 		//faz o loop enquanto existir uma posição e enquanto não existir uma peça adversária
 		while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
@@ -44,7 +44,7 @@ public class Rook extends ChessPiece{
 		}
 		
 		//LEFT
-		//atualizando para a coluna anterior a da peça
+		//atualizando os valores da posição para a coluna anterior a da peça
 		p.setValues(position.getRow(), position.getColumn() - 1);
 		//faz o loop enquanto existir uma posição e enquanto não existir uma peça adversária
 		while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
@@ -60,7 +60,7 @@ public class Rook extends ChessPiece{
 		}
 		
 		//RIGHT
-		//atualizando para a coluna seguinte a da peça
+		//atualizando os valores da posição para a coluna seguinte a da peça
 		p.setValues(position.getRow(), position.getColumn() + 1);
 		//faz o loop enquanto existir uma posição e enquanto não existir uma peça adversária
 		while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
@@ -76,7 +76,7 @@ public class Rook extends ChessPiece{
 		}
 		
 		//BELOW
-		//atualizando para a linha seguinte a da peça
+		//atualizando os valores da posição para a linha seguinte a da peça
 		p.setValues(position.getRow() + 1, position.getColumn());
 		//faz o loop enquanto existir uma posição e enquanto não existir uma peça adversária
 		while(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
