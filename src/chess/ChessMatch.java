@@ -8,12 +8,30 @@ import chess.pieces.Rook;
 
 public class ChessMatch {
 	
+	private int turn;
+	private Color currentPlayer;
 	private Board board;
 	
+	//construtor da classe
 	public ChessMatch() {
+		//atributo board recebendo o tamanho do tabuleiro
 		board = new Board(8, 8);
+		//iniciando a partida no turno 1
+		turn = 1;
+		//partidas de xadrez começam sempre com as peças brancas, por isto é passado para o currentPlayer a cor branca
+		currentPlayer = Color.WHITE;
 		//chama o método dentro do construtor pois a partida deve ser iniciada já com as peças em suas posições iniciais
 		initialSetup();
+	}
+	
+	//retornando o atributo turn
+	public int getTurn() {
+		return turn;
+	}
+	
+	//retornando o atributo currentPlayer
+	public Color getCurrentPlayer() {
+		return currentPlayer;
 	}
 	
 	//método que retorna uma matriz de peças
@@ -52,6 +70,8 @@ public class ChessMatch {
 		validateTargetPosition(source, target);
 		//atributo capturedPiece recebe o retorno do método makeMove que irá realizar a movimentação da peça
 		Piece capturedPiece = makeMove(source, target);
+		//após a jogada chama o método que atualiza o turno e o jogador
+		nextTurn();
 		//retornando o atributo capturedPiece realizando um downcasting devido ele anteriormente ser do tipo Piece
 		return (ChessPiece)capturedPiece;
 	}
@@ -75,11 +95,24 @@ public class ChessMatch {
 			//lançando a exceção informando que não existe peça na posição
 			throw new ChessException("There is no piece on source position");
 		}
+		//verifica se a peça que vai ser movimentada é da cor das peças do jogador da rodada, se não for lança uma exceção alertando o jogador
+		//neste teste é utilizado um downcasting, pois o getColor é uma propriedade da classe ChessPiece e o board.piece é uma propriedade da classe Piece
+		if(currentPlayer != ((ChessPiece)board.piece(position)).getColor()) {
+			throw new ChessException("The chosen piece is not yours");
+		}
 		//verifica se não é possível movimentar a peça
 		if(!board.piece(position).isThereAnyPossibleMove()) {
 			//lançando exceção informando que não é possível movimentar a peça
 			throw new ChessException("There is no possible moves for the chosen piece");
 		}
+	}
+	
+	//método para passar para o próximo turno
+	private void nextTurn() {
+		//incrementa 1 no turno para atualiza-lo
+		turn++;
+		//expressão ternária verifica se o jogador atual é preto ou branco, e se for o branco passa para o preto e vice e versa
+		currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
 	
 	//método responsável por validar se a posição de destino é um movimeto possível em relação a posição de origem

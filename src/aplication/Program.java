@@ -21,7 +21,7 @@ public class Program {
 				//chamando o método para limpar a tela antes de printar o tabuleiro, isto ocorre após cada nova interação
 				UI.clearScreen();
 				//pritando o tabuleiro e duas peças
-				UI.printBoard(chessMatch.getPieces());
+				UI.printMatch(chessMatch);
 				//espaçamento após o print anterior
 				System.out.println();
 				//solicitando para o usuário informar a posição atual da peça a ser movimentada
