@@ -1,7 +1,10 @@
 package aplication;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -58,13 +61,17 @@ public class UI {
 	}
 	
 	//método responsável por printar o tabuleiro atualizado, o turno e o jogador do turno
-	public static void printMatch(ChessMatch chessMatch) {
-		//printando o tabuleiro
+	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
+		//chamando o método que printa o tabuleiro
 		printBoard(chessMatch.getPieces());
 		//quebrando a linha
 		System.out.println();
+		//chamando o método que printa as peças
+		printCapturedPieces(captured);
+		//quebrando a linha
+		System.out.println();
 		//printando o turno da rodada
-		System.out.println("Turn : " + chessMatch.getTurn());
+		System.out.println("Turn: " + chessMatch.getTurn());
 		//printando o jogador da rodada
 		System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
 	}
@@ -132,6 +139,38 @@ public class UI {
         }
     	//printa um caracter vazio para o espaçamento
         System.out.print(" ");
+	}
+	
+	//método responsável por printar as peças capturadas
+	//este método recebe como parâmetro uma lista de peças e fica com o nome de captured
+	private static void printCapturedPieces(List<ChessPiece> captured) {
+		//cria uma lista de peças com o nome de white
+		//nesta linha as peças armazenadas são filtradas para que a lista recebe apenas as brancas
+		List<ChessPiece> white = captured.stream().filter(x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
+		//cria uma lista de peças com o nome de black
+		//nesta linha as peças armazenadas são filtradas para que a lista recebe apenas as PRETAS
+		List<ChessPiece> black = captured.stream().filter(x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
+		//informando que são as peças capturadas
+		System.out.println("Captured pieces:");
+		//informando que são somente as peças brancas primeiro
+		System.out.println("White:");
+		//comando que obriga as próximas peças a serem printadas a serem somente brancas
+		System.out.print(ANSI_WHITE);
+		//pegando somente a lista com as peças brancas e printando
+		System.out.println(Arrays.toString(white.toArray()));
+		//resetando para a cor padrão após printar as peças brancas
+		System.out.print(ANSI_RESET);
+		//informando que são somente as peças brancas primeiro
+		System.out.println("Black:");
+		//comando que obriga as próximas peças a serem printadas a serem somente amarelas
+		//amarelas devido o fundo do prompt ser preto
+		System.out.print(ANSI_YELLOW);
+		//pegando somente a lista com as peças brancas e printando
+		System.out.println(Arrays.toString(black.toArray()));
+		//resetando para a cor padrão após printar as peças pretas
+		System.out.print(ANSI_RESET);
+		
+		
 	}
 
 }

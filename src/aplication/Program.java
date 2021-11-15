@@ -1,6 +1,8 @@
 package aplication;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import chess.ChessException;
@@ -14,14 +16,15 @@ public class Program {
 		
 		Scanner sc = new Scanner(System.in);
 		ChessMatch chessMatch = new ChessMatch();
+		List<ChessPiece> captured = new ArrayList<>();
 		
 		while(true) {
 			//bloco try para que caso ocorra alguma exceção dentro dele o bloco catch correspondente é acessado
 			try {
 				//chamando o método para limpar a tela antes de printar o tabuleiro, isto ocorre após cada nova interação
 				UI.clearScreen();
-				//pritando o tabuleiro e duas peças
-				UI.printMatch(chessMatch);
+				//pritando o tabuleiro e suas peças, além das peças capturadas
+				UI.printMatch(chessMatch, captured);
 				//espaçamento após o print anterior
 				System.out.println();
 				//solicitando para o usuário informar a posição atual da peça a ser movimentada
@@ -42,6 +45,12 @@ public class Program {
 				ChessPosition target = UI.readChessPosition(sc);
 				//atributo capturedPiece recebe o retorno do método performChessMove que após as suas validações e chamada do método que movimenta a peça retorna a peça retirada do tabuleiro
 				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+				
+				//testando se alguma peça foi capturada
+				if(captured != null) {
+					//adicionando a peça capturada na lista de capturadas
+					captured.add(capturedPiece);
+				}
 			}
 			//bloco catch que é acessado caso ocorra uma exceção de erro no tabuleiro
 			catch(ChessException e) {
